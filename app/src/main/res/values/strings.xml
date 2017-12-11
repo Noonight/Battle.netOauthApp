@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Battle.netOauthApp</string>
+    <string name="wow">World of Warcraft</string>
+    <string name="sc2">StarCraft II</string>
+</resources>

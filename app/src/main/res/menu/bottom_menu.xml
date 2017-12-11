@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/wow_characters_item_menu"
+        android:title="@string/wow"
+        android:icon="@mipmap/wow_logo"/>
+    <item
+        android:id="@+id/sc2_profile_item_menu"
+        android:title="@string/sc2"
+        android:icon="@mipmap/sc2_logo"/>
+
+</menu>
