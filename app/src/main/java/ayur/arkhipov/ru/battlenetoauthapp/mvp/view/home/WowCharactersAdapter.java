@@ -17,19 +17,23 @@ import java.util.ArrayList;
 
 import ayur.arkhipov.ru.battlenetoauthapp.BuildConfig;
 import ayur.arkhipov.ru.battlenetoauthapp.R;
-import ayur.arkhipov.ru.battlenetoauthapp.common.log.Log;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network.model.WowCharacters;
-import ayur.arkhipov.ru.battlenetoauthapp.utils.GenderConverter;
+import ayur.arkhipov.ru.battlenetoauthapp.utils.Gender;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 class WowCharactersAdapter extends RecyclerView.Adapter<WowCharactersAdapter.ViewHolder> {
 
     private WowCharacters wowCharacters;
+    public OnWowItemClickListener onWowItemClickListener;
 
     public WowCharactersAdapter() {
         wowCharacters = new WowCharacters();
         wowCharacters.setCharacters(new ArrayList<>());
+    }
+
+    public interface OnWowItemClickListener {
+        void onWowItemClick(WowCharacters.CharactersBean item);
     }
 
     public void setData(WowCharacters wowCharacters) {
@@ -45,7 +49,7 @@ class WowCharactersAdapter extends RecyclerView.Adapter<WowCharactersAdapter.Vie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bindView(wowCharacters.getCharacters().get(position));
+        holder.bindView(wowCharacters.getCharacters().get(position), onWowItemClickListener);
     }
 
     @Override
@@ -73,7 +77,7 @@ class WowCharactersAdapter extends RecyclerView.Adapter<WowCharactersAdapter.Vie
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindView(WowCharacters.CharactersBean item) {
+        public void bindView(WowCharacters.CharactersBean item, OnWowItemClickListener itemClickListener) {
             //Log.d(item.getSpec().toString());
             if (item.getSpec() != null) {
                 //Log.d(item.getSpec().getName() + "\t" + item.getSpec().getBackgroundImage());
@@ -87,11 +91,22 @@ class WowCharactersAdapter extends RecyclerView.Adapter<WowCharactersAdapter.Vie
                                 }
                             }
                         });
+            } else {
+                Glide.with(itemView)
+                        .load(R.drawable.bg_no_spec)
+                        .into(new SimpleTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                    itemView.setBackground(resource);
+                                }
+                            }
+                        });
             }
 
             wowCharacterName.setText(item.getName());
             wowCharacterClass.setText("Class: " + String.valueOf(item.getClassX()));
-            wowCharacterGender.setText("Gender: " + GenderConverter.getGender(item.getGender()));
+            wowCharacterGender.setText("Gender: " + Gender.getGender(item.getGender()));
             wowCharacterLevel.setText("Level: " + String.valueOf(item.getLevel()));
             wowCharacterRace.setText("Race: " + String.valueOf(item.getRace()));
             if (item.getSpec() != null) {
@@ -99,6 +114,8 @@ class WowCharactersAdapter extends RecyclerView.Adapter<WowCharactersAdapter.Vie
             } else {
                 wowCharacterSpec.setText("Spec not found");
             }
+            itemView.setOnClickListener(view -> itemClickListener.onWowItemClick(item));
         }
     }
+
 }

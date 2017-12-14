@@ -1,13 +1,42 @@
 package ayur.arkhipov.ru.battlenetoauthapp.common.network.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Sc2Profile {
+public class Sc2Profile implements Parcelable {
 
     private List<CharactersBean> characters;
+
+    public Sc2Profile(Parcel in) {
+    }
+
+    @Override
+    public String toString() {
+        return "Sc2Profile{" +
+                "characters=" + characters +
+                '}';
+    }
+
+    public static final Creator<Sc2Profile> CREATOR = new Creator<Sc2Profile>() {
+        @Override
+        public Sc2Profile createFromParcel(Parcel in) {
+            return new Sc2Profile(in);
+        }
+
+        @Override
+        public Sc2Profile[] newArray(int size) {
+            return new Sc2Profile[size];
+        }
+    };
+
+    public Sc2Profile() {
+
+    }
 
     public List<CharactersBean> getCharacters() {
         return characters;
@@ -17,7 +46,37 @@ public class Sc2Profile {
         this.characters = characters;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+    }
+
     public static class CharactersBean {
+        @Override
+        public String toString() {
+            return "CharactersBean{" +
+                    "id=" + id +
+                    ", realm=" + realm +
+                    ", name='" + name + '\'' +
+                    ", displayName='" + displayName + '\'' +
+                    ", clanName='" + clanName + '\'' +
+                    ", clanTag='" + clanTag + '\'' +
+                    ", profilePath='" + profilePath + '\'' +
+                    ", portrait=" + portrait +
+                    ", avatar=" + avatar +
+                    ", career=" + career +
+                    ", swarmLevels=" + swarmLevels +
+                    ", campaign=" + campaign +
+                    ", season=" + season +
+                    ", rewards=" + rewards +
+                    ", achievements=" + achievements +
+                    '}';
+        }
+
         /**
          * id : 5990790
          * realm : 1
@@ -173,6 +232,18 @@ public class Sc2Profile {
         }
 
         public static class PortraitBean {
+            @Override
+            public String toString() {
+                return "PortraitBean{" +
+                        "x=" + x +
+                        ", y=" + y +
+                        ", w=" + w +
+                        ", h=" + h +
+                        ", offset=" + offset +
+                        ", url='" + url + '\'' +
+                        '}';
+            }
+
             /**
              * x : 0
              * y : 0
@@ -239,6 +310,18 @@ public class Sc2Profile {
         }
 
         public static class AvatarBean {
+            @Override
+            public String toString() {
+                return "AvatarBean{" +
+                        "x=" + x +
+                        ", y=" + y +
+                        ", w=" + w +
+                        ", h=" + h +
+                        ", offset=" + offset +
+                        ", url='" + url + '\'' +
+                        '}';
+            }
+
             /**
              * x : 0
              * y : 0
@@ -305,6 +388,18 @@ public class Sc2Profile {
         }
 
         public static class CareerBean {
+            @Override
+            public String toString() {
+                return "CareerBean{" +
+                        "primaryRace='" + primaryRace + '\'' +
+                        ", terranWins=" + terranWins +
+                        ", protossWins=" + protossWins +
+                        ", zergWins=" + zergWins +
+                        ", seasonTotalGames=" + seasonTotalGames +
+                        ", careerTotalGames=" + careerTotalGames +
+                        '}';
+            }
+
             /**
              * primaryRace : UNKNOWN
              * terranWins : 0
@@ -372,6 +467,15 @@ public class Sc2Profile {
 
         public static class SwarmLevelsBean {
             public static class TerranBean {
+                @Override
+                public String toString() {
+                    return "TerranBean{" +
+                            "level=" + level +
+                            ", totalLevelXP=" + totalLevelXP +
+                            ", currentLevelXP=" + currentLevelXP +
+                            '}';
+                }
+
                 /**
                  * level : 0
                  * totalLevelXP : 5000
@@ -408,6 +512,15 @@ public class Sc2Profile {
             }
 
             public static class ZergBean {
+                @Override
+                public String toString() {
+                    return "ZergBean{" +
+                            "level=" + level +
+                            ", totalLevelXP=" + totalLevelXP +
+                            ", currentLevelXP=" + currentLevelXP +
+                            '}';
+                }
+
                 /**
                  * level : 0
                  * totalLevelXP : 5000
@@ -451,6 +564,16 @@ public class Sc2Profile {
         }
 
         public static class SeasonBean {
+            @Override
+            public String toString() {
+                return "SeasonBean{" +
+                        "seasonId=" + seasonId +
+                        ", seasonNumber=" + seasonNumber +
+                        ", seasonYear=" + seasonYear +
+                        ", totalGamesThisSeason=" + totalGamesThisSeason +
+                        '}';
+            }
+
             /**
              * seasonId : 34
              * seasonNumber : 4
@@ -515,9 +638,25 @@ public class Sc2Profile {
             public void setEarned(List<Integer> earned) {
                 this.earned = earned;
             }
+
+            @Override
+            public String toString() {
+                return "RewardsBean{" +
+                        "selected=" + selected +
+                        ", earned=" + earned +
+                        '}';
+            }
         }
 
         public static class AchievementsBeanX {
+            @Override
+            public String toString() {
+                return "AchievementsBeanX{" +
+                        "points=" + points +
+                        ", achievements=" + achievements +
+                        '}';
+            }
+
             /**
              * points : {"totalPoints":10,"categoryPoints":{"4330138":0,"4386911":0,"4364473":0,"4325379":10,"4325410":0,"4325377":0}}
              * achievements : [{"achievementId":91475035553880,"completionDate":1429507199}]
@@ -543,6 +682,14 @@ public class Sc2Profile {
             }
 
             public static class PointsBean {
+                @Override
+                public String toString() {
+                    return "PointsBean{" +
+                            "totalPoints=" + totalPoints +
+                            ", categoryPoints=" + categoryPoints +
+                            '}';
+                }
+
                 /**
                  * totalPoints : 10
                  * categoryPoints : {"4330138":0,"4386911":0,"4364473":0,"4325379":10,"4325410":0,"4325377":0}
@@ -568,6 +715,18 @@ public class Sc2Profile {
                 }
 
                 public static class CategoryPointsBean {
+                    @Override
+                    public String toString() {
+                        return "CategoryPointsBean{" +
+                                "_$4330138=" + _$4330138 +
+                                ", _$4386911=" + _$4386911 +
+                                ", _$4364473=" + _$4364473 +
+                                ", _$4325379=" + _$4325379 +
+                                ", _$4325410=" + _$4325410 +
+                                ", _$4325377=" + _$4325377 +
+                                '}';
+                    }
+
                     /**
                      * 4330138 : 0
                      * 4386911 : 0
@@ -641,6 +800,14 @@ public class Sc2Profile {
             }
 
             public static class AchievementsBean {
+                @Override
+                public String toString() {
+                    return "AchievementsBean{" +
+                            "achievementId=" + achievementId +
+                            ", completionDate=" + completionDate +
+                            '}';
+                }
+
                 /**
                  * achievementId : 91475035553880
                  * completionDate : 1429507199

@@ -3,7 +3,6 @@ package ayur.arkhipov.ru.battlenetoauthapp.mvp.view.login;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,13 +13,16 @@ import android.webkit.WebViewClient;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import ayur.arkhipov.ru.battlenetoauthapp.R;
 import ayur.arkhipov.ru.battlenetoauthapp.common.Constants;
 import ayur.arkhipov.ru.battlenetoauthapp.common.log.Log;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network_blizzard.NetworkManagerBlizzard;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network_blizzard.model.AccessToken;
+import ayur.arkhipov.ru.battlenetoauthapp.mvp.presenter.login.LoginPresenter;
 import ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.HomeActivity;
-import ayur.arkhipov.ru.battlenetoauthapp.utils.SharedPreferencesConfig;
+import ayur.arkhipov.ru.battlenetoauthapp.utils.Config;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscription;
@@ -34,11 +36,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private String code;
     private AccessToken newAccessToken;
 
+    LoginPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        presenter.attachView(this);
         init();
     }
 
@@ -62,19 +67,19 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 Log.d("web View Finished");
 
                 if (url.startsWith(Constants.REDIRECT_URL)) {
-                    hideWebView();
+                    //hideWebView();
 
                     Uri uri = Uri.parse(url);
                     code = uri.getQueryParameter(Constants.CODE);
                     Log.d(code);
 
                     if (!TextUtils.isEmpty(code)) {
-                        Map<String, String> map = new HashMap<>();
-                        map.put("redirect_uri", "https://localhost");
-                        map.put("grant_type", "authorization_code");
-                        map.put("code", code);
+                        Map<String, String> param = new HashMap<>();
+                        param.put("redirect_uri", "https://localhost");
+                        param.put("grant_type", "authorization_code");
+                        param.put("code", code);
                         NetworkManagerBlizzard networkManager = new NetworkManagerBlizzard();
-                        Subscription subscription = networkManager.getBlizzardOauthApi().getAccessToken(map)
+                        Subscription subscription = networkManager.getBlizzardOauthApi().getAccessToken(param)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(accessToken -> {
@@ -115,10 +120,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void startHomeActivity() {
         if (newAccessToken != null) {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(AccessToken.class.getCanonicalName(), newAccessToken);
+            //Bundle bundle = new Bundle();
+            //bundle.putSerializable(AccessToken.class.getCanonicalName(), newAccessToken);
+            putAccessTokenToSharedPreferences(newAccessToken);
             Intent intent = new Intent(this, HomeActivity.class);
-            intent.putExtras(bundle);
+            //intent.putExtras(bundle);
             startActivity(intent);
         } else {
             Log.d("access token is empty");
@@ -127,6 +133,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void putAccessTokenToSharedPreferences(AccessToken accessToken) {
-        SharedPreferencesConfig sharedPreferences = new SharedPreferencesConfig();
+        Config sharedPreferences = new Config(getApplicationContext());
+        sharedPreferences.putAccessToken(accessToken);
     }
 }

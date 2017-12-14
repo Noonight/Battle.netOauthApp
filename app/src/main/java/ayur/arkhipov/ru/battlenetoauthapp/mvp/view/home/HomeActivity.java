@@ -11,13 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import ayur.arkhipov.ru.battlenetoauthapp.App;
 import ayur.arkhipov.ru.battlenetoauthapp.R;
 import ayur.arkhipov.ru.battlenetoauthapp.common.log.Log;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network.NetworkManager;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network.model.Sc2Profile;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network.model.WowCharacters;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network_blizzard.model.AccessToken;
+import ayur.arkhipov.ru.battlenetoauthapp.mvp.presenter.home.HomePresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
@@ -36,7 +41,8 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @BindView(R.id.sc2_iv)
     ImageView sc2Iv;
 
-    private NetworkManager networkManager;
+    @Inject
+    HomePresenter presenter;
 
     private WowCharactersAdapter wowCharactersAdapter;
     private Sc2ProfileAdapter sc2ProfileAdapter;
@@ -63,59 +69,63 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+        App.getComponent(this).inject(this);
         init();
     }
 
     private void init() {
-        networkManager = new NetworkManager(getSerAccessToken());
-        networkManager.getBlizzardApi().getUserData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(userData -> {
-                    bindBattleTag(userData.getBattletag());
-                }, throwable -> Log.d(throwable.getMessage()));
+
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         wowCharactersAdapter = new WowCharactersAdapter();
-        recyclerView.setAdapter(wowCharactersAdapter);
-        networkManager.getBlizzardApi().getWowCharacters()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(wowCharacters -> {
-                            setWowCharactersData(wowCharacters);
-                            Log.d(wowCharacters.toString());
-                        }
-                        , throwable -> Log.d(throwable.getMessage()));
-
         sc2ProfileAdapter = new Sc2ProfileAdapter();
+//      important check error
+        presenter.attachView(this);
+//
+        wowCharactersAdapter.onWowItemClickListener = item -> Toast.makeText(HomeActivity.this, item.toString(), Toast.LENGTH_SHORT).show();
+        sc2ProfileAdapter.onSc2ItemClickListener = item -> Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
 
-        wowIv.setOnClickListener(view -> {
-            recyclerView.setAdapter(wowCharactersAdapter);
-        });
-        sc2Iv.setOnClickListener(view -> {
-            recyclerView.setAdapter(sc2ProfileAdapter);
-        });
+        recyclerView.setAdapter(wowCharactersAdapter);
+
+        wowIv.setOnClickListener(view -> recyclerView.setAdapter(wowCharactersAdapter));
+        sc2Iv.setOnClickListener(view -> recyclerView.setAdapter(sc2ProfileAdapter));
     }
 
-    public void setWowCharactersData(WowCharacters wowCharacters) {
-        wowCharactersAdapter.setData(wowCharacters);
-    }
-
-    public void setSc2ProfileAdapterData(Sc2Profile sc2Profile) {
-        sc2ProfileAdapter.setData(sc2Profile);
-    }
-
-    @Override
-    public AccessToken getSerAccessToken() {
+    /*public AccessToken getSerAccessToken() {
         return (AccessToken) getIntent().getSerializableExtra(AccessToken.class.getCanonicalName());
+    }*/
+
+    @Override
+    public void onGetBattleTagSuccess(String name) {
+        battleTag.setText(name);
     }
 
     @Override
-    public void bindBattleTag(String text) {
-        battleTag.setText(text);
+    public void onGetBattleTagError(Throwable throwable) {
+        battleTag.setText(throwable.getMessage());
+    }
+
+    @Override
+    public void onGetWowCharactersSuccess(WowCharacters wowCharactersObjects) {
+        wowCharactersAdapter.setData(wowCharactersObjects);
+    }
+
+    @Override
+    public void onGetWowCharactersError(Throwable throwable) {
+        //TODO
+    }
+
+    @Override
+    public void onGetSc2ProfileSuccess(Sc2Profile sc2ProfileObject) {
+        sc2ProfileAdapter.setData(sc2ProfileObject);
+    }
+
+    @Override
+    public void onGetSc2ProfileError(Throwable throwable) {
+        //TODO
     }
 }

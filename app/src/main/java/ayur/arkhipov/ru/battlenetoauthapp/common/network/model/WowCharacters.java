@@ -1,13 +1,44 @@
 package ayur.arkhipov.ru.battlenetoauthapp.common.network.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class WowCharacters {
+public class WowCharacters implements Parcelable{
 
     private List<CharactersBean> characters;
+
+    public WowCharacters(Parcel in) {
+    }
+
+    public WowCharacters() {
+
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<WowCharacters> CREATOR = new Creator<WowCharacters>() {
+        @Override
+        public WowCharacters createFromParcel(Parcel in) {
+            return new WowCharacters(in);
+        }
+
+        @Override
+        public WowCharacters[] newArray(int size) {
+            return new WowCharacters[size];
+        }
+    };
 
     public List<CharactersBean> getCharacters() {
         return characters;

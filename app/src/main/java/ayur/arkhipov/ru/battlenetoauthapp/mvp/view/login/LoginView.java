@@ -2,8 +2,9 @@ package ayur.arkhipov.ru.battlenetoauthapp.mvp.view.login;
 
 
 import ayur.arkhipov.ru.battlenetoauthapp.common.network_blizzard.model.AccessToken;
+import ayur.arkhipov.ru.battlenetoauthapp.mvp.base.BaseView;
 
-public interface LoginView {
+public interface LoginView extends BaseView{
 
     void showWebView();
     void hideWebView();

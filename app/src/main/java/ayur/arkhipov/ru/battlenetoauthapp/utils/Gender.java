@@ -1,7 +1,7 @@
 package ayur.arkhipov.ru.battlenetoauthapp.utils;
 
 
-public class GenderConverter {
+public class Gender {
     public static String getGender(int id) {
         switch (id){
             case 0:
