@@ -9,7 +9,7 @@ import ayur.arkhipov.ru.battlenetoauthapp.common.network_blizzard.model.AccessTo
 
 public class Config {
 
-    public final String APP_PREFERENCES = "app_settings";
+    public static final String APP_PREFERENCES = "app_settings";
 
     private SharedPreferences sharedPreferences;
 

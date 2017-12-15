@@ -9,12 +9,14 @@ import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import ayur.arkhipov.ru.battlenetoauthapp.App;
 import ayur.arkhipov.ru.battlenetoauthapp.R;
 import ayur.arkhipov.ru.battlenetoauthapp.common.Constants;
 import ayur.arkhipov.ru.battlenetoauthapp.common.log.Log;
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        presenter = new LoginPresenter();
         presenter.attachView(this);
         init();
     }
@@ -74,7 +77,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                     Log.d(code);
 
                     if (!TextUtils.isEmpty(code)) {
-                        Map<String, String> param = new HashMap<>();
+                        presenter.getAccessToken(presenter.createParamAccessToken(code));
+                        /*Map<String, String> param = new HashMap<>();
                         param.put("redirect_uri", "https://localhost");
                         param.put("grant_type", "authorization_code");
                         param.put("code", code);
@@ -87,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                                         Log.d(accessToken.toString());
                                         startHomeActivity();
                                     }
-                                        , throwable -> Log.d(throwable.getMessage()));
+                                        , throwable -> Log.d(throwable.getMessage()));*/
                     } else {
                         Log.d(" Code is empty ");
                     }
@@ -119,13 +123,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void startHomeActivity() {
-        if (newAccessToken != null) {
+        if (!TextUtils.isEmpty(new Config(getApplicationContext()).getAccessToken())) {
             //Bundle bundle = new Bundle();
             //bundle.putSerializable(AccessToken.class.getCanonicalName(), newAccessToken);
-            putAccessTokenToSharedPreferences(newAccessToken);
             Intent intent = new Intent(this, HomeActivity.class);
             //intent.putExtras(bundle);
             startActivity(intent);
+            finish();
         } else {
             Log.d("access token is empty");
         }
@@ -135,5 +139,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void putAccessTokenToSharedPreferences(AccessToken accessToken) {
         Config sharedPreferences = new Config(getApplicationContext());
         sharedPreferences.putAccessToken(accessToken);
+    }
+
+    @Override
+    public void onGetAccessTokenError(Throwable throwable) {
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void signOut() {
+        webView.clearCache(true);
     }
 }

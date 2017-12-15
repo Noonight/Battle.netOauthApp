@@ -26,26 +26,26 @@ public class HomePresenter extends BasePresenter<HomeView> {
                     , throwable -> getView().onGetBattleTagError(throwable));
     }
 
-    public void getWowCharacters() {
-        blizzardApi.getWowCharacters()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(wowCharacters -> getView().onGetWowCharactersSuccess(wowCharacters),
-                        throwable -> getView().onGetWowCharactersError(throwable));
-    }
-
-    public void getSc2Profile() {
-        blizzardApi.getSc2Profile()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(sc2Profile -> getView().onGetSc2ProfileSuccess(sc2Profile),
-                        throwable -> getView().onGetSc2ProfileError(throwable));
-    }
+//    public void getWowCharacters() {
+//        blizzardApi.getWowCharacters()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(wowCharacters -> getView().onGetWowCharactersSuccess(wowCharacters),
+//                        throwable -> getView().onGetWowCharactersError(throwable));
+//    }
+//
+//    public void getSc2Profile() {
+//        blizzardApi.getSc2Profile()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(sc2Profile -> getView().onGetSc2ProfileSuccess(sc2Profile),
+//                        throwable -> getView().onGetSc2ProfileError(throwable));
+//    }
 
     @Override
     public void updateView() {
         getUserData();
-        getWowCharacters();
-        getSc2Profile();
+//        getWowCharacters();
+//        getSc2Profile();
     }
 }

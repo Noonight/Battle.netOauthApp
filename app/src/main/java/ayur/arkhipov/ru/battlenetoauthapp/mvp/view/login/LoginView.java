@@ -10,5 +10,7 @@ public interface LoginView extends BaseView{
     void hideWebView();
     void startHomeActivity();
     void putAccessTokenToSharedPreferences(AccessToken accessToken);
+    void onGetAccessTokenError(Throwable throwable);
+    void signOut();
 
 }

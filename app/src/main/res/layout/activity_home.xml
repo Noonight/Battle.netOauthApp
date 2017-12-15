@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,66 +7,106 @@
     android:orientation="vertical"
     tools:context="ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.HomeActivity">
 
-    <include
-        android:id="@+id/battle_tag"
-        layout="@layout/battle_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="end" />
-
-    <LinearLayout
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <android.support.v4.widget.NestedScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <include
+                layout="@layout/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
-        </android.support.v4.widget.NestedScrollView>
+            <!--<include
+                android:id="@+id/battle_tag"
+                layout="@layout/battle_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="end" />-->
 
-    </LinearLayout>
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-    <LinearLayout
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:background="@null"
-        android:orientation="horizontal"
-        android:padding="8dp">
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <ImageView
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-            android:id="@+id/wow_iv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:elevation="16dp"
-            android:src="@mipmap/wow_logo" />
+                </android.support.v4.widget.NestedScrollView>
 
-        <ImageView
+            </LinearLayout>-->
 
-            android:id="@+id/sc2_iv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:elevation="16dp"
-            android:src="@mipmap/sc2_logo" />
-    </LinearLayout>
+            <FrameLayout
+                android:id="@+id/home_fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+                <!--<TextView
+                    android:text="@string/wow"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />-->
 
-    <android.support.design.widget.BottomNavigationView
+
+            <!--<LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="@null"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+
+                    android:id="@+id/wow_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:elevation="16dp"
+                    android:src="@mipmap/wow_logo" />
+
+                <ImageView
+
+                    android:id="@+id/sc2_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:elevation="16dp"
+                    android:src="@mipmap/sc2_logo" />
+            </LinearLayout>-->
+        </LinearLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/home_nv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nv_header"
+            app:menu="@menu/home_nv_menu" />
+
+    </android.support.v4.widget.DrawerLayout>
+
+    <!--<android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,6 +115,6 @@
         android:visibility="gone"
 
         app:elevation="8dp"
-        app:menu="@menu/bottom_menu" />
+        app:menu="@menu/bottom_menu" />-->
 
-</android.widget.RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

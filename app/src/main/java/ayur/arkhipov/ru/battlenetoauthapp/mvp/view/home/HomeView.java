@@ -11,9 +11,4 @@ public interface HomeView extends BaseView{
     void onGetBattleTagSuccess(String name);
     void onGetBattleTagError(Throwable throwable);
 
-    void onGetWowCharactersSuccess(WowCharacters wowCharactersObjects);
-    void onGetWowCharactersError(Throwable throwable);
-
-    void onGetSc2ProfileSuccess(Sc2Profile sc2ProfileObject);
-    void onGetSc2ProfileError(Throwable throwable);
 }
