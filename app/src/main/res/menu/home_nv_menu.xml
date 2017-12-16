@@ -5,12 +5,20 @@
         <item
             android:id="@+id/blizzard_profile_nv_item_menu"
             android:icon="@mipmap/wow_logo"
-            android:title="@string/battle.net_profile"/>
+            android:title="@string/battle.net_profile" />
+        <item
+            android:id="@+id/wow_nv_item_menu"
+            android:icon="@mipmap/wow_logo"
+            android:title="@string/wow" />
+        <item
+            android:id="@+id/wow_talents_calculator_nv_item_menu"
+            android:icon="@mipmap/wow_logo"
+            android:title="@string/wow_talents_calculator"/>
     </group>
 
     <item
         android:id="@+id/sign_out_nv_item_menu"
         android:icon="@mipmap/wow_logo"
-        android:title="@string/sign_out"/>
+        android:title="@string/sign_out" />
 
 </menu>

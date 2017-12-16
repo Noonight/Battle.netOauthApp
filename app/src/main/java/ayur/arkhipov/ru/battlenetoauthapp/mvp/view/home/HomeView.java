@@ -11,4 +11,7 @@ public interface HomeView extends BaseView{
     void onGetBattleTagSuccess(String name);
     void onGetBattleTagError(Throwable throwable);
 
+    void showProfileFragment();
+    void showWowCharactersListMasterFragment();
+    void showWowTalentsCalculatorFragment();
 }

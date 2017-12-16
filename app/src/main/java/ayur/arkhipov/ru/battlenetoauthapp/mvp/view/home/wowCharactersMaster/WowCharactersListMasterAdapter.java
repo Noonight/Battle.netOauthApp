@@ -1,4 +1,4 @@
-package ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home;
+package ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.wowCharactersMaster;
 
 
 import android.graphics.drawable.Drawable;
@@ -22,12 +22,12 @@ import ayur.arkhipov.ru.battlenetoauthapp.utils.Gender;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class WowCharactersAdapter extends RecyclerView.Adapter<WowCharactersAdapter.ViewHolder> {
+class WowCharactersListMasterAdapter extends RecyclerView.Adapter<WowCharactersListMasterAdapter.ViewHolder> {
 
     private WowCharacters wowCharacters;
     public OnWowItemClickListener onWowItemClickListener;
 
-    public WowCharactersAdapter() {
+    public WowCharactersListMasterAdapter() {
         wowCharacters = new WowCharacters();
         wowCharacters.setCharacters(new ArrayList<>());
     }

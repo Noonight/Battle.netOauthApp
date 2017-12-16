@@ -17,6 +17,7 @@ import ayur.arkhipov.ru.battlenetoauthapp.common.network.model.Sc2Profile;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/*deprecated*/
 class Sc2ProfileAdapter extends RecyclerView.Adapter<Sc2ProfileAdapter.ViewHolder>{
 
     private Sc2Profile sc2Profile;

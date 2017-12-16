@@ -18,6 +18,9 @@ import javax.inject.Inject;
 import ayur.arkhipov.ru.battlenetoauthapp.App;
 import ayur.arkhipov.ru.battlenetoauthapp.R;
 import ayur.arkhipov.ru.battlenetoauthapp.mvp.presenter.home.HomePresenter;
+import ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.profile.ProfileFragment;
+import ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.wowCharactersMaster.WowCharactersListMasterFragment;
+import ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.wowTalentsCalculator.WowTalentsCalculatorFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -46,7 +49,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Inject
     HomePresenter presenter;
 
-//    private WowCharactersAdapter wowCharactersAdapter;
+//    private WowCharactersListMasterAdapter wowCharactersAdapter;
 //    private Sc2ProfileAdapter sc2ProfileAdapter;
 
 //    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
@@ -73,7 +76,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        App.getComponent(this).inject(this);
+        App.getComponent(this).injectHome(this);
         init();
     }
 
@@ -86,7 +89,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 //                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 //        recyclerView.setLayoutManager(layoutManager);
 
-//        wowCharactersAdapter = new WowCharactersAdapter();
+//        wowCharactersAdapter = new WowCharactersListMasterAdapter();
 //        sc2ProfileAdapter = new Sc2ProfileAdapter();
 ////      important check error
         presenter.attachView(this);
@@ -101,7 +104,10 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     }
 
     private void initNavigationView() {
-        homeNv.setNavigationItemSelectedListener(this::selectDrawerItem);
+        homeNv.setNavigationItemSelectedListener(item -> {
+            selectDrawerItem(item);
+            return true;
+        });
         headerLayout = homeNv.getHeaderView(0);
 
         //headerLayout = homeNv.inflateHeaderView(R.layout.nv_header);
@@ -131,22 +137,47 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean selectDrawerItem(MenuItem item) {
+    private void selectDrawerItem(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.blizzard_profile_nv_item_menu:
-                //TODO
-                return true;
+                showProfileFragment();
+            case R.id.wow_nv_item_menu:
+                showWowCharactersListMasterFragment();
+            case R.id.wow_talents_calculator_nv_item_menu:
+                showWowTalentsCalculatorFragment();
             case R.id.sign_out_nv_item_menu:
                 //TODO
-                return true;
-            default:
-                return true;
         }
     }
 
 //    public AccessToken getSerAccessToken() {
 //        return (AccessToken) getIntent().getSerializableExtra(AccessToken.class.getCanonicalName());
 //    }
+
+
+    @Override
+    public void showProfileFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.home_fragment_container, new ProfileFragment(), ProfileFragment.class.getName())
+                .commit();
+    }
+
+    @Override
+    public void showWowCharactersListMasterFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.home_fragment_container, new WowCharactersListMasterFragment(), ProfileFragment.class.getName())
+                .commit();
+    }
+
+    @Override
+    public void showWowTalentsCalculatorFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.home_fragment_container, new WowTalentsCalculatorFragment(), ProfileFragment.class.getName())
+                .commit();
+    }
 
     @Override
     public void onGetBattleTagSuccess(String name) {
