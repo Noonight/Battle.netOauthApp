@@ -13,12 +13,11 @@
         <item
             android:id="@+id/wow_talents_calculator_nv_item_menu"
             android:icon="@mipmap/wow_logo"
-            android:title="@string/wow_talents_calculator"/>
+            android:title="@string/wow_talents_calculator" />
+        <item
+            android:id="@+id/sign_out_nv_item_menu"
+            android:icon="@mipmap/wow_logo"
+            android:title="@string/sign_out" />
     </group>
-
-    <item
-        android:id="@+id/sign_out_nv_item_menu"
-        android:icon="@mipmap/wow_logo"
-        android:title="@string/sign_out" />
 
 </menu>

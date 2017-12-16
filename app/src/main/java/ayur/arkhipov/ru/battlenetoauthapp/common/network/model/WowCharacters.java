@@ -48,7 +48,7 @@ public class WowCharacters implements Parcelable{
         this.characters = characters;
     }
 
-    public static class CharactersBean {
+    public static class CharactersBean implements Parcelable {
         /**
          * name : Задруляка
          * realm : Eversong
@@ -79,6 +79,54 @@ public class WowCharacters implements Parcelable{
         private long lastModified;
         private String guild;
         private String guildRealm;
+
+        protected CharactersBean(Parcel in) {
+            name = in.readString();
+            realm = in.readString();
+            battlegroup = in.readString();
+            classX = in.readInt();
+            race = in.readInt();
+            gender = in.readInt();
+            level = in.readInt();
+            achievementPoints = in.readInt();
+            thumbnail = in.readString();
+            lastModified = in.readLong();
+            guild = in.readString();
+            guildRealm = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(name);
+            dest.writeString(realm);
+            dest.writeString(battlegroup);
+            dest.writeInt(classX);
+            dest.writeInt(race);
+            dest.writeInt(gender);
+            dest.writeInt(level);
+            dest.writeInt(achievementPoints);
+            dest.writeString(thumbnail);
+            dest.writeLong(lastModified);
+            dest.writeString(guild);
+            dest.writeString(guildRealm);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<CharactersBean> CREATOR = new Creator<CharactersBean>() {
+            @Override
+            public CharactersBean createFromParcel(Parcel in) {
+                return new CharactersBean(in);
+            }
+
+            @Override
+            public CharactersBean[] newArray(int size) {
+                return new CharactersBean[size];
+            }
+        };
 
         public String getName() {
             return name;

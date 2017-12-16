@@ -2,6 +2,7 @@ package ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.wowCharactersMaster.wow
 
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 
 import ayur.arkhipov.ru.battlenetoauthapp.App;
 import ayur.arkhipov.ru.battlenetoauthapp.R;
+import ayur.arkhipov.ru.battlenetoauthapp.common.network.model.WowCharacters;
 import ayur.arkhipov.ru.battlenetoauthapp.mvp.presenter.home.wowCharacters.wowCharacterDetail.WowCharacterDetailPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +27,7 @@ public class WowCharacterDetailFragment extends Fragment implements WowCharacter
     TextView wowCharacterDetailRealmTv;
 
     @Inject
-    private WowCharacterDetailPresenter presenter;
+    WowCharacterDetailPresenter presenter;
 
     public static WowCharacterDetailFragment newInstance(Bundle bundle) {
         WowCharacterDetailFragment mInstance = new WowCharacterDetailFragment();
@@ -50,6 +52,14 @@ public class WowCharacterDetailFragment extends Fragment implements WowCharacter
     }
 
     private void initViews() {
+        TESTbindView();
+    }
 
+    private void TESTbindView() {
+        if (getArguments() != null) {
+            Parcelable item = getArguments().getParcelable(WowCharacterDetailFragment.class.getName());
+            wowCharacterDetailNameTv.setText(((WowCharacters.CharactersBean) item).getName());
+            wowCharacterDetailRealmTv.setText(((WowCharacters.CharactersBean) item).getRealm());
+        }
     }
 }

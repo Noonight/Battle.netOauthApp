@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -132,21 +133,22 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item))
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            selectDrawerItem(item);
             return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     private void selectDrawerItem(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.blizzard_profile_nv_item_menu:
-                showProfileFragment();
-            case R.id.wow_nv_item_menu:
-                showWowCharactersListMasterFragment();
-            case R.id.wow_talents_calculator_nv_item_menu:
-                showWowTalentsCalculatorFragment();
-            case R.id.sign_out_nv_item_menu:
-                //TODO
+        if (item.getItemId() == R.id.blizzard_profile_nv_item_menu) {
+            showProfileFragment();
+        } else if (item.getItemId() == R.id.wow_nv_item_menu) {
+            showWowCharactersListMasterFragment();
+        } else if (item.getItemId() == R.id.wow_talents_calculator_nv_item_menu) {
+            showWowTalentsCalculatorFragment();
+        } else if (item.getItemId() == R.id.sign_out_nv_item_menu) {
+            Toast.makeText(this, "Sign out", Toast.LENGTH_SHORT).show();
         }
     }
 

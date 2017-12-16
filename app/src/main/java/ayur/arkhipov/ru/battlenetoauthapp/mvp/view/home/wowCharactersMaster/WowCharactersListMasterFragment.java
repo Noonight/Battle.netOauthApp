@@ -54,7 +54,8 @@ public class WowCharactersListMasterFragment extends Fragment implements WowChar
         adapter = new WowCharactersListMasterAdapter();
         wowCharactersListRv.setAdapter(adapter);
 
-        adapter.onWowItemClickListener = item -> showDetailFragment(new WowCharacterDetailModel().parse(item));
+        adapter.onWowItemClickListener = item -> /*showDetailFragment(new WowCharacterDetailModel().parse(item)*/
+            TESTshowDetail(item);
     }
 
     @Override
@@ -71,6 +72,16 @@ public class WowCharactersListMasterFragment extends Fragment implements WowChar
     public void showDetailFragment(WowCharacterDetailModel wowCharacterDetailModel) {
         Bundle bundle = new Bundle();
         // TODO
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.home_fragment_container, WowCharacterDetailFragment.newInstance(bundle), WowCharacterDetailFragment.class.getName())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void TESTshowDetail(WowCharacters.CharactersBean item) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(WowCharacterDetailFragment.class.getName(), item);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.home_fragment_container, WowCharacterDetailFragment.newInstance(bundle), WowCharacterDetailFragment.class.getName())
