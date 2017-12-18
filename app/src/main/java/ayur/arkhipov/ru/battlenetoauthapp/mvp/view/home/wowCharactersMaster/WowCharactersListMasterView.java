@@ -9,5 +9,5 @@ interface WowCharactersListMasterView extends BaseView {
     void onGetWowCharactersSuccess(WowCharacters wowCharacters);
     void onGetWowCharactersError(Throwable throwable);
 
-    void showDetailFragment(WowCharacterDetailModel wowCharacterDetailModel);
+    void showDetailFragment(WowCharacters.CharactersBean item);
 }

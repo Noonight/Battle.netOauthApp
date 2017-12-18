@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import ayur.arkhipov.ru.battlenetoauthapp.BuildConfig;
 import ayur.arkhipov.ru.battlenetoauthapp.R;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network.model.WowCharacters;
+import ayur.arkhipov.ru.battlenetoauthapp.utils.Classes;
 import ayur.arkhipov.ru.battlenetoauthapp.utils.Gender;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -105,7 +106,7 @@ class WowCharactersListMasterAdapter extends RecyclerView.Adapter<WowCharactersL
             }
 
             wowCharacterName.setText(item.getName());
-            wowCharacterClass.setText("Class: " + String.valueOf(item.getClassX()));
+            wowCharacterClass.setText("Class: " + Classes.getClass(item.getClassX()));
             wowCharacterGender.setText("Gender: " + Gender.getGender(item.getGender()));
             wowCharacterLevel.setText("Level: " + String.valueOf(item.getLevel()));
             wowCharacterRace.setText("Race: " + String.valueOf(item.getRace()));

@@ -1,14 +1,22 @@
 package ayur.arkhipov.ru.battlenetoauthapp.mvp.view.login;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -35,10 +43,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @BindView(R.id.web_view)
     WebView webView;
+    @BindView(R.id.loading_pb)
+    ProgressBar loadingPb;
     private String code;
     private AccessToken newAccessToken;
 
     LoginPresenter presenter;
+
+    private boolean newInstance = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +59,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         ButterKnife.bind(this);
         presenter = new LoginPresenter();
         presenter.attachView(this);
+
+        if (getIntent().getExtras() != null) {
+            newInstance = getIntent().getExtras().getBoolean("newInstance");
+            if (newInstance) {
+                Log.d("GOOD NEW INSTANCE");
+            }
+        }
+
+        if (newInstance) {
+            signOut();
+        }
+
         init();
     }
 
@@ -70,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 Log.d("web View Finished");
 
                 if (url.startsWith(Constants.REDIRECT_URL)) {
-                    //hideWebView();
+                    hideWebView();
 
                     Uri uri = Uri.parse(url);
                     code = uri.getQueryParameter(Constants.CODE);
@@ -119,6 +143,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void hideWebView() {
         webView.setVisibility(View.GONE);
+        loadingPb.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -149,5 +174,28 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void signOut() {
         webView.clearCache(true);
+        webView.clearHistory();
+        clearCookies(getApplicationContext());
+    }
+
+    @SuppressWarnings("deprecation")
+    public static void clearCookies(Context context)
+    {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            Log.d("Using clearCookies code for API >=" + String.valueOf(Build.VERSION_CODES.LOLLIPOP_MR1));
+            CookieManager.getInstance().removeAllCookies(null);
+            CookieManager.getInstance().flush();
+        } else
+        {
+            Log.d("Using clearCookies code for API <" + String.valueOf(Build.VERSION_CODES.LOLLIPOP_MR1));
+            CookieSyncManager cookieSyncMngr= CookieSyncManager.createInstance(context);
+            cookieSyncMngr.startSync();
+            CookieManager cookieManager= CookieManager.getInstance();
+            cookieManager.removeAllCookie();
+            cookieManager.removeSessionCookie();
+            cookieSyncMngr.stopSync();
+            cookieSyncMngr.sync();
+        }
     }
 }

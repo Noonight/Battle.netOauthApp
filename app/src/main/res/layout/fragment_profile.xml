@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="18dp"
+    android:layout_gravity="center"
+    android:gravity="center"
     tools:context=".mvp.view.home.profile.ProfileFragment">
 
     <TextView

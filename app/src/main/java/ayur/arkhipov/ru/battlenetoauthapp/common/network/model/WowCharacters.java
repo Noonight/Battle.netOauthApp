@@ -1,12 +1,15 @@
 package ayur.arkhipov.ru.battlenetoauthapp.common.network.model;
 
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WowCharacters implements Parcelable{
 
@@ -17,6 +20,23 @@ public class WowCharacters implements Parcelable{
 
     public WowCharacters() {
 
+    }
+
+    public WowCharacters getCharactersWithSpec() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            characters
+                    .stream()
+                    .filter(charactersBean -> charactersBean.getSpec() != null)
+                    .collect(Collectors.toList());
+        } else {
+            List<CharactersBean> filterItems = new ArrayList<>();
+            for (CharactersBean item : characters) {
+                if (item.getSpec() != null)
+                    filterItems.add(item);
+            }
+            characters = filterItems;
+        }
+        return this;
     }
 
     @Override

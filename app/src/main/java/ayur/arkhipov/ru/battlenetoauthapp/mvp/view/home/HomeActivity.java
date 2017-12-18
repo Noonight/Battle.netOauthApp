@@ -1,5 +1,6 @@
 package ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,10 +19,13 @@ import javax.inject.Inject;
 
 import ayur.arkhipov.ru.battlenetoauthapp.App;
 import ayur.arkhipov.ru.battlenetoauthapp.R;
+import ayur.arkhipov.ru.battlenetoauthapp.common.log.Log;
 import ayur.arkhipov.ru.battlenetoauthapp.mvp.presenter.home.HomePresenter;
 import ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.profile.ProfileFragment;
 import ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.wowCharactersMaster.WowCharactersListMasterFragment;
 import ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.wowTalentsCalculator.WowTalentsCalculatorFragment;
+import ayur.arkhipov.ru.battlenetoauthapp.mvp.view.login.LoginActivity;
+import ayur.arkhipov.ru.battlenetoauthapp.utils.Config;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -82,6 +86,9 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     }
 
     private void init() {
+
+        Log.d(new Config(getApplicationContext()).getAccessToken());
+
         setSupportActionBar(homeToolbar);
         initNavigationView();
 //        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
@@ -148,8 +155,17 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         } else if (item.getItemId() == R.id.wow_talents_calculator_nv_item_menu) {
             showWowTalentsCalculatorFragment();
         } else if (item.getItemId() == R.id.sign_out_nv_item_menu) {
-            Toast.makeText(this, "Sign out", Toast.LENGTH_SHORT).show();
+            showLoginActivity();
+            //Toast.makeText(this, "Sign out", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void showLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("newInstance", true);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 //    public AccessToken getSerAccessToken() {

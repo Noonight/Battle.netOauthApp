@@ -57,7 +57,7 @@ public final class NetworkManagerBlizzard {
                     .header("Authorization", credential)
                     .build();
         });
-        Log.d(okHttpClientBuilder.toString());
+        //Log.d(okHttpClientBuilder.toString());
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://eu.battle.net")

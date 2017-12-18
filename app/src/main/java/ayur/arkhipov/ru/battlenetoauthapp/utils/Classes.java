@@ -1,8 +1,8 @@
 package ayur.arkhipov.ru.battlenetoauthapp.utils;
 
 
-public class Rases {
-    public static String getRase(int id) {
+public class Classes {
+    public static String getClass(int id) {
         switch (id) {
             case 1:
                 return "Warrior";
