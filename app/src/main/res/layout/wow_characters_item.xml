@@ -1,60 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginTop="4dp"
+    android:layout_height="60dp"
     android:layout_marginHorizontal="2dp"
-    android:layout_height="250dp">
+    android:layout_marginTop="4dp"
+    android:theme="@style/WowItemTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:padding="8dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/wow_character_name"
+        <ImageView
+            android:id="@+id/wow_character_class_item_iv"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/sc2_logo" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <TextView
+            <TextView
+                android:id="@+id/wow_character_nick_item_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mock"
+                android:textSize="18sp" />
 
-            android:id="@+id/wow_character_class"
+            <TextView
+                android:id="@+id/wow_character_realm_item_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mock"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
+            android:orientation="vertical"
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/wow_character_race"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/wow_character_level_item_tv"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:text="@string/mock" />
 
-        <TextView
-            android:id="@+id/wow_character_gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
+            <TextView
+                android:shadowColor="@color/colorPrimaryBlizzard"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/level"
+                android:textSize="18sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/wow_character_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/wow_character_spec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
     </LinearLayout>
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@null"-->
+    <!--android:orientation="vertical"-->
+    <!--android:padding="8dp">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/wow_character_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="18sp" />-->
+
+    <!--<TextView-->
+
+    <!--android:id="@+id/wow_character_class"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="16sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/wow_character_race"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="16sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/wow_character_gender"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="16sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/wow_character_level"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="16sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/wow_character_spec"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/colorWhite"-->
+    <!--android:textSize="16sp" />-->
+    <!--</LinearLayout>-->
 
 
 </android.support.v7.widget.CardView>

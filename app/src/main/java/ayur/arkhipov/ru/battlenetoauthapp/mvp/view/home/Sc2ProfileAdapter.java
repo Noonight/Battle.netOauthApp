@@ -67,7 +67,7 @@ class Sc2ProfileAdapter extends RecyclerView.Adapter<Sc2ProfileAdapter.ViewHolde
 
         public void bindView(Sc2Profile.CharactersBean item, OnSc2ItemClickListener itemClickListener) {
             sc2ProfileNameTv.setText(item.getName());
-            Glide.with(itemView)
+            Glide.with(itemView.getContext())
                     .load(item.getAvatar().getUrl())
                     .into(sc2ProfilePortraitIv);
             itemView.setOnClickListener(view -> itemClickListener.onSc2ItemClick(item));

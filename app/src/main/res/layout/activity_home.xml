@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context="ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.HomeActivity">
 
+
+
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:fitsSystemWindows="true"
@@ -18,10 +20,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include
-                layout="@layout/toolbar"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <include
+                    layout="@layout/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.AppBarLayout>
 
             <!--<include
                 android:id="@+id/battle_tag"
@@ -101,6 +107,7 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             android:layout_gravity="start"
+            app:itemTextColor="@color/menu_text_color"
             app:headerLayout="@layout/nv_header"
             app:menu="@menu/home_nv_menu" />
 

@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFF</color>
     <color name="colorBackground">#002650</color>
+
+    <color name="colorPrimaryBlizzard">#2E3B5C</color>
+    <color name="colorPrimaryDarkBlizzard">#1C2337</color>
+    <color name="colorIconBlizzard">#00AEFF</color>
 </resources>

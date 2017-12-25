@@ -11,4 +11,5 @@ public class Constants {
             + "response_type="+RESPONSE_TYPE+"&client_id="+CLIENT_ID+"&redirect_uri="+REDIRECT_URL;
     public static final String ACCESS_TOKEN = "access_token";
     public static final String API_URL = "https://eu.api.battle.net";
+    public static final String THUMBNAIL_URL = "http://eu.battle.net/static-render/eu/";
 }

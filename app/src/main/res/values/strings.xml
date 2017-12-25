@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">Battle.netOauthApp</string>
+    <string name="app_name">Battle.net Oauth App</string>
     <string name="wow">World of Warcraft</string>
     <string name="sc2">StarCraft II</string>
-    <string name="battle.net_profile">Battle.net Profile</string>
+    <string name="battle.net_profile">Profile</string>
     <string name="sign_out">Sign out</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="drawer_open">Open nv</string>
-    <string name="drawer_close">close nv</string>
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
     <string name="wow_talents_calculator">WOW talents Calculator</string>
+    <string name="mock">Mock text is here</string>
+    <string name="level">LEVEL</string>
 </resources>

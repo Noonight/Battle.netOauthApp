@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -88,7 +89,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     private void init() {
 
         Log.d(new Config(getApplicationContext()).getAccessToken());
-
         setSupportActionBar(homeToolbar);
         initNavigationView();
 //        bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
@@ -116,6 +116,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
             selectDrawerItem(item);
             return true;
         });
+        homeNv.setItemIconTintList(null); // very difficult
         headerLayout = homeNv.getHeaderView(0);
 
         //headerLayout = homeNv.inflateHeaderView(R.layout.nv_header);
@@ -150,10 +151,13 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     private void selectDrawerItem(MenuItem item) {
         if (item.getItemId() == R.id.blizzard_profile_nv_item_menu) {
             showProfileFragment();
+            drawerLayout.closeDrawer(Gravity.LEFT);
         } else if (item.getItemId() == R.id.wow_nv_item_menu) {
             showWowCharactersListMasterFragment();
+            drawerLayout.closeDrawer(Gravity.LEFT);
         } else if (item.getItemId() == R.id.wow_talents_calculator_nv_item_menu) {
             showWowTalentsCalculatorFragment();
+            drawerLayout.closeDrawer(Gravity.LEFT);
         } else if (item.getItemId() == R.id.sign_out_nv_item_menu) {
             showLoginActivity();
             //Toast.makeText(this, "Sign out", Toast.LENGTH_SHORT).show();
