@@ -9,4 +9,17 @@
     <color name="colorPrimaryBlizzard">#2E3B5C</color>
     <color name="colorPrimaryDarkBlizzard">#1C2337</color>
     <color name="colorIconBlizzard">#00AEFF</color>
+
+    <color name="colorClassWarrior">#C79C6E</color>
+    <color name="colorClassWarlock">#9482C9</color>
+    <color name="colorClassShaman">#0070DE</color>
+    <color name="colorClassRogue">#FFF569</color>
+    <color name="colorClassPriest">#FFFFFF</color>
+    <color name="colorClassPaladin">#F58CBA</color>
+    <color name="colorClassMonk">#00FF96</color>
+    <color name="colorClassMage">#69CCF0</color>
+    <color name="colorClassHunter">#ABD473</color>
+    <color name="colorClassDruid">#FF7D0A</color>
+    <color name="colorClassDemonHunter">#A330C9</color>
+    <color name="colorClassDeathKnight">#C41F3B</color>
 </resources>

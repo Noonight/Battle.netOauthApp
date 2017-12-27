@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
 
 public class WowCharacterDetailFragment extends Fragment implements WowCharacterDetailView {
 
-    @BindView(R.id.wow_character_detail_name_tv)
+    /*@BindView(R.id.wow_character_detail_name_tv)
     TextView wowCharacterDetailNameTv;
     @BindView(R.id.wow_character_detail_realm_tv)
-    TextView wowCharacterDetailRealmTv;
+    TextView wowCharacterDetailRealmTv;*/
 
     @Inject
     WowCharacterDetailPresenter presenter;
@@ -58,8 +58,8 @@ public class WowCharacterDetailFragment extends Fragment implements WowCharacter
     private void TESTbindView() {
         if (getArguments() != null) {
             Parcelable item = getArguments().getParcelable(WowCharacterDetailFragment.class.getName());
-            wowCharacterDetailNameTv.setText(((WowCharacters.CharactersBean) item).getName());
-            wowCharacterDetailRealmTv.setText(((WowCharacters.CharactersBean) item).getRealm());
+//            wowCharacterDetailNameTv.setText(((WowCharacters.CharactersBean) item).getName());
+//            wowCharacterDetailRealmTv.setText(((WowCharacters.CharactersBean) item).getRealm());
         }
     }
 }

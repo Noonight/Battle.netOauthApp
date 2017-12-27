@@ -1,9 +1,9 @@
 package ayur.arkhipov.ru.battlenetoauthapp.mvp.view.home.wowCharactersMaster;
 
 
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +15,14 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import ayur.arkhipov.ru.battlenetoauthapp.BuildConfig;
 import ayur.arkhipov.ru.battlenetoauthapp.R;
-import ayur.arkhipov.ru.battlenetoauthapp.common.Constants;
+import ayur.arkhipov.ru.battlenetoauthapp.common.log.Log;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network.model.WowCharacters;
 import ayur.arkhipov.ru.battlenetoauthapp.utils.Classes;
-import ayur.arkhipov.ru.battlenetoauthapp.utils.Gender;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static ayur.arkhipov.ru.battlenetoauthapp.utils.Classes.getClassResId;
+import static ayur.arkhipov.ru.battlenetoauthapp.utils.Classes.getClassDrawableIconResId;
 
 class WowCharactersListMasterAdapter extends RecyclerView.Adapter<WowCharactersListMasterAdapter.ViewHolder> {
 
@@ -64,7 +62,7 @@ class WowCharactersListMasterAdapter extends RecyclerView.Adapter<WowCharactersL
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-//        @BindView(R.id.wow_character_name)
+        //        @BindView(R.id.wow_character_name)
 //        TextView wowCharacterName;
 //        @BindView(R.id.wow_character_class)
 //        TextView wowCharacterClass;
@@ -84,6 +82,8 @@ class WowCharactersListMasterAdapter extends RecyclerView.Adapter<WowCharactersL
         TextView wowCharacterRealmItemTv;
         @BindView(R.id.wow_character_level_item_tv)
         TextView wowCharacterLevelItemTv;
+        @BindView(R.id.wow_character_text_level_tv)
+        TextView wowCharacterTextLevelTv;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -129,15 +129,27 @@ class WowCharactersListMasterAdapter extends RecyclerView.Adapter<WowCharactersL
 //                wowCharacterSpec.setText("Spec not found");
 //            }
             Glide.with(itemView.getContext())
-                    .load(/*Constants.THUMBNAIL_URL + item.getThumbnail()*/getClassResId(itemView.getContext(), item.getClassX()))
+                    .load(/*Constants.THUMBNAIL_URL + item.getThumbnail()*/getClassDrawableIconResId(item.getClassX()))
                     .placeholder(R.mipmap.wow_logo)
                     .error(R.drawable.icon_warning)
                     .into(wowCharacterFaceItemIv);
             wowCharacterNickItemTv.setText(item.getName());
             wowCharacterRealmItemTv.setText(item.getRealm());
             wowCharacterLevelItemTv.setText(String.valueOf(item.getLevel()));
+            //Log.d(String.valueOf(item.getClassX()));
+            //Log.d(String.valueOf(Classes.getClassColorResId(item.getClassX())));
+            setTextColorWithClassId(item.getClassX());
             itemView.setOnClickListener(view -> itemClickListener.onWowItemClick(item));
         }
+
+        private void setTextColorWithClassId(int id) {
+            int color = ContextCompat.getColor(itemView.getContext(), Classes.getClassColorResId(id));
+            wowCharacterNickItemTv.setTextColor(color);
+            wowCharacterRealmItemTv.setTextColor(color);
+            wowCharacterLevelItemTv.setTextColor(color);
+            wowCharacterTextLevelTv.setTextColor(color);
+        }
+
     }
 
 }
