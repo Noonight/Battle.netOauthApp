@@ -84,6 +84,8 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         ButterKnife.bind(this);
         App.getComponent(this).injectHome(this);
         init();
+        showWowCharactersListMasterFragment();
+        homeNv.setCheckedItem(R.id.wow_nv_item_menu);
     }
 
     private void init() {

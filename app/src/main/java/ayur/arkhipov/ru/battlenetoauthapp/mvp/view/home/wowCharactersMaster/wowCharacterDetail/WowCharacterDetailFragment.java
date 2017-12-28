@@ -77,7 +77,8 @@ public class WowCharacterDetailFragment extends Fragment implements WowCharacter
             R.id.wow_character_detail_spec_role_tv,
             R.id.wow_character_detail_spec_description_tv,
             R.id.wow_character_detail_spec_text_role_tv,
-            R.id.wow_character_detail_spec_text_description_tv
+            R.id.wow_character_detail_spec_text_description_tv,
+            R.id.wow_character_detail_spec_text_spec_tv
     })
     List<TextView> detailSpec;
 
