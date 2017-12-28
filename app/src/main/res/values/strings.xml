@@ -10,4 +10,7 @@
     <string name="wow_talents_calculator">WOW talents Calculator</string>
     <string name="mock">Mock text is here</string>
     <string name="level">LEVEL</string>
+    <string name="role">Role:</string>
+    <string name="spec_not_found">Spec not found!</string>
+    <string name="description">Description:</string>
 </resources>

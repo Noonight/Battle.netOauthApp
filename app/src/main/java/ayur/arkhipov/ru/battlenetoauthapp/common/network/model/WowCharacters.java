@@ -100,7 +100,7 @@ public class WowCharacters implements Parcelable{
         private String guild;
         private String guildRealm;
 
-        protected CharactersBean(Parcel in) {
+        public CharactersBean(Parcel in) {
             name = in.readString();
             realm = in.readString();
             battlegroup = in.readString();
@@ -113,6 +113,10 @@ public class WowCharacters implements Parcelable{
             lastModified = in.readLong();
             guild = in.readString();
             guildRealm = in.readString();
+        }
+
+        public CharactersBean() {
+
         }
 
         @Override
