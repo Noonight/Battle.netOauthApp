@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Battle.net Oauth Приложение</string>
+    <string name="battle.net_profile">Профиль</string>
+    <string name="sc2">Стар Крафт 2</string>
+    <string name="wow">Ворлд оф Варкрафт</string>
+    <string name="sign_out">Выйти</string>
+    <string name="drawer_open">Открыть рисовальщик</string>
+    <string name="drawer_close">Закрыть рисовальщик</string>
+    <string name="wow_talents_calculator">ВОВ калькулятор талантов</string>
+    <string name="mock">Мусорная инфа</string>
+    <string name="level">УРОВЕНЬ</string>
+    <string name="role">Роль:</string>
+    <string name="spec_not_found">Специализация не найдены!</string>
+    <string name="description">Описание:</string>
+    <string name="spec">Специализация:</string>
+</resources>

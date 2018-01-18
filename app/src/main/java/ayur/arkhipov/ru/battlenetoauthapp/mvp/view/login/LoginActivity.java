@@ -155,7 +155,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             //intent.putExtras(bundle);
             startActivity(intent);
             finish();
-        } else {
+        } /*if (TextUtils.isEmpty(new Config(getApplicationContext()).getAccessToken())) {
+
+        } */else {
             Log.d("access token is empty");
         }
     }

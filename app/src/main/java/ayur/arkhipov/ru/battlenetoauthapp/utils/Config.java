@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import ayur.arkhipov.ru.battlenetoauthapp.common.Constants;
+import ayur.arkhipov.ru.battlenetoauthapp.common.Language;
 import ayur.arkhipov.ru.battlenetoauthapp.common.network_blizzard.model.AccessToken;
 
 public class Config {
 
     public static final String APP_PREFERENCES = "app_settings";
+
+    public static Language currentLanguage = Language.ru_RU;
 
     private SharedPreferences sharedPreferences;
 

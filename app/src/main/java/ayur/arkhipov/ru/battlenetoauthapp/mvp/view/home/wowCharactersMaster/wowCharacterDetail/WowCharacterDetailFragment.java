@@ -25,6 +25,7 @@ import ayur.arkhipov.ru.battlenetoauthapp.common.network.model.WowCharacters;
 import ayur.arkhipov.ru.battlenetoauthapp.mvp.presenter.home.wowCharacters.wowCharacterDetail.WowCharacterDetailPresenter;
 import ayur.arkhipov.ru.battlenetoauthapp.utils.Classes;
 import ayur.arkhipov.ru.battlenetoauthapp.utils.Races;
+import ayur.arkhipov.ru.battlenetoauthapp.utils.Role;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
@@ -134,7 +135,8 @@ public class WowCharacterDetailFragment extends Fragment implements WowCharacter
         if (item.getSpec() != null) {
             showDetailSpec();
             wowCharacterDetailSpecNameTv.setText(item.getSpec().getName());
-            wowCharacterDetailSpecRoleTv.setText(item.getSpec().getRole());
+            wowCharacterDetailSpecRoleTv.setText(Role.getRoleByName(item.getSpec().getRole()));
+            //wowCharacterDetailSpecRoleTv.setText(item.getSpec().getRole());
             wowCharacterDetailSpecDescriptionTv.setText(item.getSpec().getDescription());
 
             Glide.with(getContext())
@@ -146,6 +148,8 @@ public class WowCharacterDetailFragment extends Fragment implements WowCharacter
                     .load(R.drawable.bg_no_spec)
                     .into(wowCharacterDetailSpecBackgroundIv);*/
         }
+
+        //TODO add achivment points
 
     }
 

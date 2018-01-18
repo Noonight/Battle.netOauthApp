@@ -56,6 +56,7 @@ public class AppModule {
                 HttpUrl originalUrl = chain.request().url();
                 HttpUrl url = originalUrl.newBuilder()
                         .addQueryParameter(Constants.ACCESS_TOKEN, shConfig.getAccessToken())
+                        .addQueryParameter("locale", "ru_RU")
                         .build();
                 Request.Builder requestBuilder = chain.request().newBuilder().url(url);
                 Request request = requestBuilder.build();

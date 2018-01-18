@@ -7,36 +7,68 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import ayur.arkhipov.ru.battlenetoauthapp.R;
+import ayur.arkhipov.ru.battlenetoauthapp.common.Language;
 
 public class Classes {
     public static String getClassString(int id) {
-        switch (id) {
-            case 1:
-                return "Warrior";
-            case 2:
-                return "Paladin";
-            case 3:
-                return "Hunter";
-            case 4:
-                return "Rogue";
-            case 5:
-                return "Priest";
-            case 6:
-                return "Death Knight";
-            case 7:
-                return "Shaman";
-            case 8:
-                return "Mage";
-            case 9:
-                return "Warlock";
-            case 10:
-                return "Monk";
-            case 11:
-                return "Druid";
-            case 12:
-                return "Demon Hunter";
-            default:
-                return "races not found";
+        if (Config.currentLanguage == Language.ru_RU) {
+            switch (id) {
+                case 1:
+                    return "Воин";
+                case 2:
+                    return "Паладин";
+                case 3:
+                    return "Охотник";
+                case 4:
+                    return "Разбойник";
+                case 5:
+                    return "Жрец";
+                case 6:
+                    return "Рыцарь смерти";
+                case 7:
+                    return "Шаман";
+                case 8:
+                    return "Маг";
+                case 9:
+                    return "Чернокнижник";
+                case 10:
+                    return "Монах";
+                case 11:
+                    return "Друид";
+                case 12:
+                    return "Охотник на демонов";
+                default:
+                    return "Мурлок";
+            }
+        } else {
+            switch (id) {
+                case 1:
+                    return "Warrior";
+                case 2:
+                    return "Paladin";
+                case 3:
+                    return "Hunter";
+                case 4:
+                    return "Rogue";
+                case 5:
+                    return "Priest";
+                case 6:
+                    return "Death Knight";
+                case 7:
+                    return "Shaman";
+                case 8:
+                    return "Mage";
+                case 9:
+                    return "Warlock";
+                case 10:
+                    return "Monk";
+                case 11:
+                    return "Druid";
+                case 12:
+                    return "Demon Hunter";
+                default:
+                    return "races not found";
+            }
         }
     }
 
